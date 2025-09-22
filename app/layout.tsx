@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import { Toaster } from "sonner";
+import { SessionProvider } from "next-auth/react";
 
 
 
@@ -19,7 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-       <ThemeProvider
+        <SessionProvider>
+          <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
@@ -29,6 +31,7 @@ export default function RootLayout({
             {children}
             <Toaster position="top-center" richColors />
           </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

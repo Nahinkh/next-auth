@@ -109,10 +109,10 @@ const SignInPage = () => {
         <CardFooter className="flex flex-col gap-2">
           <p className="text-center text-sm text-gray-500">Or continue with</p>
           <div className="flex w-full flex-col gap-2">
-            <Button variant="outline" className="w-full flex items-center gap-2" onClick={() => signIn("google")}>
+            <Button variant="outline" className="w-full flex items-center gap-2" onClick={() => signIn("google", { callbackUrl: "/" })}>
               <FcGoogle size={20} /> Login with Google
             </Button>
-            <Button variant="outline" className="w-full flex items-center gap-2" onClick={() => signIn("github")}>
+            <Button variant="outline" className="w-full flex items-center gap-2" onClick={() => signIn("github", { callbackUrl: "/" })}>
               <FaGithub size={20} /> Login with GitHub
             </Button>
             <Button

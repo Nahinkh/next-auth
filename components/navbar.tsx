@@ -1,20 +1,55 @@
+'use client'
 import React from 'react'
 import { Button } from './ui/button'
 import ToggleMode from './toggle-mode'
 import Link from 'next/link'
+import { signOut, useSession } from 'next-auth/react'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 const Navbar = () => {
+  const { data: session, status } = useSession()
   return (
-    <nav className='w-full flex items-center dark:text-black justify-between p-4 dark:bg-foreground'>
-      <Link href="/" className='text-2xl font-bold'>Next-Auth</Link>
-      <div className="flex flex-wrap items-center gap-2 md:flex-row">
+    <nav className="flex items-center justify-between px-6 py-3 shadow bg-background dark:bg-gray-800">
+      <div className="text-xl font-bold">
+        <Link href="/">Next-Auth</Link>
+      </div>
+        
+      <div className="flex items-center gap-4">
         <ToggleMode />
-        <Link href="/sign-in">
-          <Button variant="outline" className='bg-transparent border border-current hover:bg-accent hover:text-accent'>Sign In</Button>
-        </Link>
-        <Link href="/register">
-          <Button className='bg-accent text-accent-foreground hover:bg-accent/80'>Register</Button>
-        </Link>
+        {status === "loading" && <p>Loading...</p>}
+
+        {status === "unauthenticated" && (
+          <Link href="/sign-in">
+            <Button variant="outline">Login</Button>
+          </Link>
+        )}
+
+        {status === "authenticated" && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Avatar className="cursor-pointer">
+                <AvatarImage src={session.user?.image || ""} alt={session.user?.name || ""} />
+                <AvatarFallback>
+                  {session.user?.name?.charAt(0) || "U"}
+                </AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuLabel>
+                {session.user?.name || "User"}
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem disabled>
+                {session.user?.email}
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => signOut()}>
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
     </nav>
   )
