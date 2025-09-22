@@ -188,13 +188,13 @@ const RegisterPage = () => {
                 <CardFooter className="flex flex-col gap-2">
                     <p className="text-center text-sm text-gray-500">Or register with</p>
                     <div className="flex w-full flex-col gap-2">
-                        <Button onClick={() => signIn("google")} variant="outline" className="w-full flex items-center gap-2">
+                        <Button onClick={() => signIn("google",{callbackUrl: "/"})} variant="outline" className="w-full flex items-center gap-2">
                             <FcGoogle size={20} /> Register with Google
                         </Button>
-                        <Button onClick={() => signIn("github")} variant="outline" className="w-full flex items-center gap-2">
+                        <Button onClick={() => signIn("github", { callbackUrl: "/" })} variant="outline" className="w-full flex items-center gap-2">
                             <FaGithub size={20} /> Register with GitHub
                         </Button>
-                        <Button onClick={() => signIn("facebook")} variant="outline" className="w-full flex items-center gap-2 text-blue-600">
+                        <Button onClick={() => signIn("facebook", { callbackUrl: "/" })} variant="outline" className="w-full flex items-center gap-2 text-blue-600">
                             <FaFacebook size={20} /> Register with Facebook
                         </Button>
                     </div>
