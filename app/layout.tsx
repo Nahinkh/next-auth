@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import { Toaster } from "sonner";
 import { SessionProvider } from "next-auth/react";
+import Footer from "@/components/footer";
 
 
 
@@ -30,6 +31,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Toaster position="top-center" richColors />
+            <Footer/>
           </ThemeProvider>
         </SessionProvider>
       </body>

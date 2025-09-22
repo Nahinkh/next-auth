@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import axios from 'axios'
 import { Eye, EyeOff } from 'lucide-react'
+import { signIn } from 'next-auth/react'
 import React, { useState } from 'react'
 import { FaFacebook, FaGithub } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
@@ -187,13 +188,13 @@ const RegisterPage = () => {
                 <CardFooter className="flex flex-col gap-2">
                     <p className="text-center text-sm text-gray-500">Or register with</p>
                     <div className="flex w-full flex-col gap-2">
-                        <Button variant="outline" className="w-full flex items-center gap-2">
+                        <Button onClick={() => signIn("google")} variant="outline" className="w-full flex items-center gap-2">
                             <FcGoogle size={20} /> Register with Google
                         </Button>
-                        <Button variant="outline" className="w-full flex items-center gap-2">
+                        <Button onClick={() => signIn("github")} variant="outline" className="w-full flex items-center gap-2">
                             <FaGithub size={20} /> Register with GitHub
                         </Button>
-                        <Button variant="outline" className="w-full flex items-center gap-2 text-blue-600">
+                        <Button onClick={() => signIn("facebook")} variant="outline" className="w-full flex items-center gap-2 text-blue-600">
                             <FaFacebook size={20} /> Register with Facebook
                         </Button>
                     </div>
